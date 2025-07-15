@@ -689,6 +689,6 @@ module Rack
       ".zaz"       => "application/vnd.zzazz.deck+xml",
       ".zip"       => "application/zip",
       ".zmm"       => "application/vnd.handheld-entertainment+xml",
-    }
+    }.freeze
   end
 end

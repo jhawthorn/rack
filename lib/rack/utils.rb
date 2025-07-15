@@ -556,14 +556,14 @@ module Rack
       507 => 'Insufficient Storage',
       508 => 'Loop Detected',
       511 => 'Network Authentication Required'
-    }
+    }.freeze
 
     # Responses with HTTP status codes that should not have an entity body
-    STATUS_WITH_NO_ENTITY_BODY = Hash[((100..199).to_a << 204 << 304).product([true])]
+    STATUS_WITH_NO_ENTITY_BODY = Hash[((100..199).to_a << 204 << 304).product([true])].freeze
 
     SYMBOL_TO_STATUS_CODE = Hash[*HTTP_STATUS_CODES.map { |code, message|
       [message.downcase.gsub(/\s|-/, '_').to_sym, code]
-    }.flatten]
+    }.flatten].freeze
 
     OBSOLETE_SYMBOLS_TO_STATUS_CODES = {
       payload_too_large: 413,
@@ -595,7 +595,7 @@ module Rack
       end
     end
 
-    PATH_SEPS = Regexp.union(*[::File::SEPARATOR, ::File::ALT_SEPARATOR].compact)
+    PATH_SEPS = Regexp.union(*[::File::SEPARATOR, ::File::ALT_SEPARATOR].compact).freeze
 
     def clean_path_info(path_info)
       parts = path_info.split PATH_SEPS

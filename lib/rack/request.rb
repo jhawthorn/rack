@@ -40,8 +40,8 @@ module Rack
       attr_accessor :x_forwarded_proto_priority
     end
 
-    @forwarded_priority = [:forwarded, :x_forwarded]
-    @x_forwarded_proto_priority = [:proto, :scheme]
+    @forwarded_priority = [:forwarded, :x_forwarded].freeze
+    @x_forwarded_proto_priority = [:proto, :scheme].freeze
 
     valid_ipv4_octet = /\.(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])/
 
@@ -158,7 +158,7 @@ module Rack
       FORM_DATA_MEDIA_TYPES = [
         'application/x-www-form-urlencoded',
         'multipart/form-data'
-      ]
+      ].freeze
 
       # The set of media-types. Requests that do not indicate
       # one of the media types present in this list will not be eligible
@@ -166,11 +166,11 @@ module Rack
       PARSEABLE_DATA_MEDIA_TYPES = [
         'multipart/related',
         'multipart/mixed'
-      ]
+      ].freeze
 
       # Default ports depending on scheme. Used to decide whether or not
       # to include the port in a generated URI.
-      DEFAULT_PORTS = { 'http' => 80, 'https' => 443, 'coffee' => 80 }
+      DEFAULT_PORTS = { 'http' => 80, 'https' => 443, 'coffee' => 80 }.freeze
 
       # The address of the client which connected to the proxy.
       HTTP_X_FORWARDED_FOR = 'HTTP_X_FORWARDED_FOR'

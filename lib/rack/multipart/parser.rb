@@ -496,7 +496,7 @@ module Rack
 
         # Other dummy encodings are rarely used and have not been supported yet.
         # Adding support for them will require careful considerations.
-      }
+      }.freeze
 
       def handle_dummy_encoding(name, body)
         # A string object with a 'dummy' encoding does not have full functionality and can cause errors.
