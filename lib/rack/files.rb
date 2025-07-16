@@ -18,17 +18,28 @@ module Rack
   # like sendfile on the +path+.
 
   class Files
-    ALLOWED_VERBS = %w[GET HEAD OPTIONS]
-    ALLOW_HEADER = ALLOWED_VERBS.join(', ')
-    MULTIPART_BOUNDARY = 'AaB03x'
+    ALLOWED_VERBS = %w[GET HEAD OPTIONS].freeze
+    ALLOW_HEADER = ALLOWED_VERBS.join(', ').freeze
+    MULTIPART_BOUNDARY = 'AaB03x'.freeze
 
     attr_reader :root
+
+
+    class CallGet
+      def initialize(app)
+        @app = app
+      end
+
+      def call(env)
+        @app.get(env)
+      end
+    end
 
     def initialize(root, headers = {}, default_mime = 'text/plain')
       @root = (::File.expand_path(root) if root)
       @headers = headers
       @default_mime = default_mime
-      @head = Rack::Head.new(lambda { |env| get env })
+      @head = Rack::Head.new(CallGet.new(self))
     end
 
     def call(env)

@@ -405,6 +405,9 @@ module Rack
       </body>
       </html>
     HTML
+    if defined?(Ractor)
+      Ractor.make_shareable(ERB)
+    end
 
     # :startdoc:
   end
